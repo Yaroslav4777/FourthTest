@@ -26,15 +26,16 @@ public class simpleTest {
     @Test
 
     public void SearchSpace() {
-        WebElement searchSpace = driver.findElement(By.xpath("//*[@id='user-addr__input']"));
-        searchSpace.clear();
-        searchSpace.sendKeys("Страна чудес, шахматный город, клетка е5");//enter a incorrect address
+        WebElement loginButton = driver.findElement(By.xpath("//*[@id='authorization-app']/div/button"));
+        loginButton.click();
+        WebElement phoneSpace = driver.findElement(By.xpath("//*[@id='authorization-app']/div/div/div[2]/div[2]/div/form/label/input"));
+        phoneSpace.sendKeys("88888888888");//enter a incorrect phone-number
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        WebElement enterButton = driver.findElement(By.xpath("//*[@id='user-addr__form']/label[2]/a"));
+        WebElement enterButton = driver.findElement(By.xpath("//*[@id='authorization-app']/div/div/div[2]/div[2]/div/form/button"));
         enterButton.click();
-        WebElement product = driver.findElement(By.xpath("//*[@id='user-addr__form']/label[1]/span[2]/span[3]"));
-        String productName = product.getText();
-        Assert.assertEquals("Пожалуйста, уточните ваш адрес", productName);
+        WebElement errorMessage = driver.findElement(By.xpath("//*[@id='authorization-app']/div/div/div[2]/div[2]/div/form/div[1]"));
+        String error = errorMessage.getText();
+        Assert.assertEquals("Нажимая на кнопку «Войти», вы принимаете условия пользовательского соглашения", error);
 
     }
 }
