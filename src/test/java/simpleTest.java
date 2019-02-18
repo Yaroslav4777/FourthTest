@@ -1,3 +1,4 @@
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -37,5 +38,12 @@ public class simpleTest {
         String error = errorMessage.getText();
         Assert.assertEquals("Нажимая на кнопку «Войти», вы принимаете условия пользовательского соглашения", error);
 
+    }
+
+    @AfterClass
+
+    public static void tearDown(){
+
+        driver.quit();
     }
 }
